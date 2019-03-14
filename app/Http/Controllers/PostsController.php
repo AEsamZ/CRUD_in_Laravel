@@ -29,7 +29,7 @@ class PostsController extends Controller
     }
 
     public function edit(Post $post)
-    {   $post=Post::Findorfail($post);
+    {
         return view('posts.edit' , [
             'post' => $post,
         ]); 

@@ -25,11 +25,13 @@
             <label for="exampleInputPassword1">Description</label>
             <textarea name="description" class="form-control">{{@$post->description}}</textarea>
         </div>
-        <select class="form-control" name="user_id">
-               @foreach($users as $user)
-                   <option value="{{$user->id}}">{{$user->name}}</option>
-               @endforeach
-           </select>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Post Creator</label>
+            <select class="form-control" name="user_id">
+                    <option value="{{isset($post->user->id)?$post->user->id:0}}">{{isset($post->user->name)?$post->user->name:"Not Found"}}</option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
