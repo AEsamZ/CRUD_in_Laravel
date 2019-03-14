@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 
 class PostsController extends Controller
 {
@@ -21,7 +23,7 @@ class PostsController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(StorePostRequest $request){
         Post::create(request()->all());      
         return redirect()->route('posts.index');
     }
@@ -39,7 +41,7 @@ class PostsController extends Controller
         ]);
     }
 
-    public function update($post)
+    public function update(UpdatePostRequest $request)
     {
         $request= request();
         $post = Post::findorfail($post);
