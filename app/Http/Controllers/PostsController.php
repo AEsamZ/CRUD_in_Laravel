@@ -12,7 +12,7 @@ class PostsController extends Controller
 {
     public function index(){
         return view('posts.index',[
-            'posts'=>Post::all()
+            'posts'=>Post::paginate(4)
         ]);
     }
 
@@ -29,7 +29,7 @@ class PostsController extends Controller
     }
 
     public function edit(Post $post)
-    {        
+    {   $post=Post::Findorfail($post);
         return view('posts.edit' , [
             'post' => $post,
         ]); 
@@ -41,12 +41,12 @@ class PostsController extends Controller
         ]);
     }
 
-    public function update(UpdatePostRequest $request)
-    {
-        $request= request();
-        $post = Post::findorfail($post);
+    public function update(UpdatePostRequest $request,$post)
+    {        
+        $post = Post::Findorfail($post);
         $post->title=$request->title;
         $post->description=$request->description;
+        $post->slug=$request->slug;
         $post->save();
         return redirect()->route("posts.index");
     }

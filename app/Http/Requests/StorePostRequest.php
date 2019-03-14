@@ -24,15 +24,18 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|min:3',
+            'title'=>'required|min:3|unique:posts',
             'description'=>'required|min:10'
         ];
     }
 
     public function messages(){
         return [
-        'title.required'=>'required by ahmed',
-        'description.required'=>'required by ahmed',
+        'title.required'=>'title required by ahmed',
+        'title.min'=>'title minimum 3 characters',
+        'title.unique'=>'the title shoud be unique',
+        'description.required'=>'description required by ahmed',
+        'description.min:10'=>'minimum 10 characters'
         ];
     }
 }
