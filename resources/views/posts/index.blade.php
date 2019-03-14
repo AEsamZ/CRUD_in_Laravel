@@ -8,6 +8,7 @@
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Creator Name</th>
+      <th scope="col">Slugged Title</th>
       <th scope="col">Option</th>
     </tr>
   </thead>
@@ -18,32 +19,16 @@
       <td>{{$post->title}}</td>
       <td>{{$post->description}}</td>
       <td>{{ isset($post->user) ? $post->user->name : 'Not Found'}}</td>
-      <td><a href="/posts/{{$post->id}}/edit">Edit</a> OR <a type="button"  row_id="{{$post->id}}" data-toggle="modal" data-target="#exampleModal" id="delete_toggle">Delete</a> OR <a href="/posts/{{$post->id}}">View</a></td>
+      <td>{{ isset($post->slug) ? $post->slug : 'Not Found'}}</td>
+      <td><a href="/posts/{{$post->id}}/edit">Edit</a> OR <a href="/posts/{{$post->id}}">View</a> OR 
+      <form action="{{route('posts.destroy', [$post->id])}}" method="POST" class="d-inline">
+              @csrf
+              @method('DELETE')
+              <button onclick="return confirm('Delete post? Are you sure?')" type="submit">Delete</button>
+            </form>
+    </td>
     </tr>
     @endforeach
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Delete Post? Are you sure?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <form id="form_delete" method="POST" action="{{route('posts.destroy',$post->id)}}" >
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit"  id="delete_item" type="button" class="btn btn-primary">Yes</button>
-                        </form>
-
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        </tbody>
-    </table>
+    
+    {{ $posts->links() }}
 @endsection
