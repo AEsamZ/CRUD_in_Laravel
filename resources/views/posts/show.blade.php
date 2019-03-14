@@ -1,27 +1,22 @@
 @extends('layouts.app')
 @section ('content')
 <a href="{{route('posts.index')}}" class="btn btn-danger">Back</a>
-<form action="{{route('posts.index')}}" method="POST" >
-<table>
-    <tr>
-         <th>Post details</th>
-    </tr>
-    <tr>
-        <td>Title:</td>
-        <td>{{$post->title}}</td>
-    </tr>
-
-    <tr>
-        <td>Description:</td>
-        <td>{{$post->description}}</td>
-    </tr>
-
-    <tr>
-        <td>Created at:</td>
-        <td>{{$post->created_at}}</td>
-    </tr>
-
-
-</table>
-</form>
+<div class="container">
+        <div>
+            <label>Title: </label>
+            <label>{{$post->title}}</label>
+        </div>
+        <div>
+            <label>Description: </label>
+            <label>{{$post->description}}</label>
+        </div>
+        <div>
+            <label>Created at: </label>
+            <label>{{$post->created_at}}</label>
+        </div>
+        <div>
+            <label>Slug: </label>
+            <label>{{$post->slug}}</label>
+        </div>        
+</div>
 @endsection
