@@ -26,7 +26,7 @@ class UpdatePostRequest extends FormRequest
         $id=($this->segment(2));
         return [
             'title'=> 'required|min:3|unique:posts,title,'.$id,
-            'description'=>'required|min:10,'.$id,
+            'description'=>'required|min:10,'.$id,            
         ];
     }
 
